@@ -13,6 +13,8 @@ import java.io.IOException;
  */
 public class Principal {
     public static void main(String[] args) {
+        //puede incluir la ruta relativa en su lugar, si el archivo miPrograma.uam se encuentra en 
+        //la misma carpeta desde donde se esta ejecutadno el programa
         String archivo = "/home/salvador/Documentos/Compiladores/Compiladores/src/LeerArchivos/miPrograma.uam";
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
