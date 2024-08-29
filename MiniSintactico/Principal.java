@@ -12,7 +12,7 @@ import java.util.Stack;
  * y luego utiliza una pila para realizar el análisis sintáctico basado en una tabla de análisis sintáctico.
  * 
  * @author Salvador Gonzalez Arellano
- * @version 1.0
+ * @version 1.1
  */
 public class Principal {
 
@@ -46,7 +46,6 @@ public class Principal {
         boolean avanzarCad = true;
         String sigSimbolo;
         ArrayList<String> sigProd;
-        boolean error = false;
 
         do {
             // Avanza al siguiente token si corresponde
@@ -69,7 +68,6 @@ public class Principal {
             } else if (tablaSin.esTerminal(sigSimbolo)) {
                 // Error de sintaxis si el símbolo es terminal y no coincide
                 System.out.println("Error de sintaxis, recibió un " + token.getTIPO() + " y se esperaba un " + sigSimbolo);
-                error = true;
                 break;
             } else {
                 // Busca la siguiente producción en la tabla sintáctica
@@ -77,7 +75,6 @@ public class Principal {
                 if (sigProd.size() == 0) {
                     // Error de sintaxis si no hay producción para la combinación actual
                     System.out.println("Error de sintaxis, recibió un " + token.getTIPO() + " y se esperaba un " + sigSimbolo);
-                    error = true;
                     break;
                 } else {
                     // Apila la producción obtenida
@@ -90,10 +87,15 @@ public class Principal {
             }
         } while (!pila.peek().equals("DELIMITADOR"));
 
-        // Verifica si el análisis sintáctico fue exitoso
-        if (!error) {
+        // Revisamos si llegamos al final de la cadena de entrada, si no es así
+        // entonces detectamos un error de sintaxis porque la pila se vacio, pero
+        // no se llegó al final de la cadena de entrada
+        if(!token.getTIPO().equals("DELIMITADOR")){
+            System.out.println("Error de sintaxis en el token "+token.getTIPO());
+        } else {
             System.out.println("Sintaxis correcta");
         }
+        // Verifica si el análisis sintáctico fue exitoso
     }
 }
 
