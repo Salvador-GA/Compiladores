@@ -14,41 +14,6 @@ import java.util.Map;
  * @author Salvador Gonzalez Arellano
  * @version 1.0
  */
-public class TablaSintactica {
-    /** @brief Índices para los no terminales. */
-    private static final int E = 0;
-    private static final int EP = 1;
-    private static final int T = 2;
-    private static final int TP = 3;
-    private static final int F = 4;
-
-    /** @brief Índices para los terminales. */
-    private static final int ID = 0;
-    private static final int MAS = 1;
-    private static final int POR = 2;
-    private static final int PARABRE = 3;
-    private static final int PARCIERRA = 4;
-    private static final int DELIMITADOR = 5;
-    
-    /** @brief Mapa que asocia los nombres de los símbolos con sus índices. */
-    private Map<String, Integer> mapConstantes;
-    
-    /** @brief Lista que contiene los no terminales del lenguaje. */
-    private ArrayList<String> noTerminales;
-
-    /** 
-     * @brief Tabla de análisis sintáctico.
-     * 
-     * Es una lista tridimensional donde cada entrada corresponde a una regla de producción.
-     */
-	private ArrayList<ArrayList<ArrayList<String>>> tablaAnSin;
-
-    /**
-     * @brief Constructor que inicializa la tabla de análisis sintáctico.
-     *
-     * Este constructor configura los índices para los terminales y no terminales,
-     * inicializa la tabla de análisis sintáctico y define las reglas de producción.
-     */
     public TablaSintactica() {
         // Inicializa el mapa de constantes
         mapConstantes = new HashMap<>();
@@ -83,53 +48,53 @@ public class TablaSintactica {
 
         // Definición de las reglas de producción en la tabla de análisis sintáctico
         // Tabla[E][ID] E -> T EP
-        tablaAnSin.get(E).get(ID).addFirst("T");
-        tablaAnSin.get(E).get(ID).addFirst("EP");
+        tablaAnSin.get(E).get(ID).add(0, "T");
+        tablaAnSin.get(E).get(ID).add(0, "EP");
 
         // Tabla[T][ID] T -> F TP
-        tablaAnSin.get(T).get(ID).addFirst("F");
-        tablaAnSin.get(T).get(ID).addFirst("TP");
+        tablaAnSin.get(T).get(ID).add(0, "F");
+        tablaAnSin.get(T).get(ID).add(0, "TP");
 
         // Tabla[F][ID] F -> ID
-        tablaAnSin.get(F).get(ID).addFirst("ID");
+        tablaAnSin.get(F).get(ID).add(0, "ID");
 
         // Tabla[EP][MAS] EP -> + T EP
-        tablaAnSin.get(EP).get(MAS).addFirst("MAS");
-        tablaAnSin.get(EP).get(MAS).addFirst("T");
-        tablaAnSin.get(EP).get(MAS).addFirst("EP");
+        tablaAnSin.get(EP).get(MAS).add(0, "MAS");
+        tablaAnSin.get(EP).get(MAS).add(0, "T");
+        tablaAnSin.get(EP).get(MAS).add(0, "EP");
 
         // Tabla[TP][MAS] TP -> VACIA
-        tablaAnSin.get(TP).get(MAS).addFirst("VACIA");
+        tablaAnSin.get(TP).get(MAS).add(0, "VACIA");
 
         // Tabla[TP][POR] TP -> * F TP
-        tablaAnSin.get(TP).get(POR).addFirst("POR");
-        tablaAnSin.get(TP).get(POR).addFirst("F");
-        tablaAnSin.get(TP).get(POR).addFirst("TP");
+        tablaAnSin.get(TP).get(POR).add(0, "POR");
+        tablaAnSin.get(TP).get(POR).add(0, "F");
+        tablaAnSin.get(TP).get(POR).add(0, "TP");
 
         // Tabla[E][PARABRE] E -> T EP
-        tablaAnSin.get(E).get(PARABRE).addFirst("T");
-        tablaAnSin.get(E).get(PARABRE).addFirst("EP");
+        tablaAnSin.get(E).get(PARABRE).add(0, "T");
+        tablaAnSin.get(E).get(PARABRE).add(0, "EP");
 
         // Tabla[T][PARABRE] T -> F TP
-        tablaAnSin.get(T).get(PARABRE).addFirst("F");
-        tablaAnSin.get(T).get(PARABRE).addFirst("TP");
+        tablaAnSin.get(T).get(PARABRE).add(0, "F");
+        tablaAnSin.get(T).get(PARABRE).add(0, "TP");
 
         // Tabla[F][PARABRE] F -> PARABRE E PARCIERRA
-        tablaAnSin.get(F).get(PARABRE).addFirst("PARABRE");
-        tablaAnSin.get(F).get(PARABRE).addFirst("E");
-        tablaAnSin.get(F).get(PARABRE).addFirst("PARCIERRA");
+        tablaAnSin.get(F).get(PARABRE).add(0, "PARABRE");
+        tablaAnSin.get(F).get(PARABRE).add(0, "E");
+        tablaAnSin.get(F).get(PARABRE).add(0, "PARCIERRA");
 
         // Tabla[EP][PARCIERRA] EP -> VACIA
-        tablaAnSin.get(EP).get(PARCIERRA).addFirst("VACIA");
+        tablaAnSin.get(EP).get(PARCIERRA).add(0, "VACIA");
 
         // Tabla[TP][PARCIERRA] TP -> VACIA
-        tablaAnSin.get(TP).get(PARCIERRA).addFirst("VACIA");
+        tablaAnSin.get(TP).get(PARCIERRA).add(0, "VACIA");
 
         // Tabla[EP][DELIMITADOR] EP -> VACIA
-        tablaAnSin.get(EP).get(DELIMITADOR).addFirst("VACIA");
+        tablaAnSin.get(EP).get(DELIMITADOR).add(0, "VACIA");
 
         // Tabla[TP][DELIMITADOR] TP -> VACIA
-        tablaAnSin.get(TP).get(DELIMITADOR).addFirst("VACIA");
+        tablaAnSin.get(TP).get(DELIMITADOR).add(0, "VACIA");
     }
 
     /**
